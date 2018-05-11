@@ -26,14 +26,12 @@ if (!class_exists('GetSiteHeader')) :
             add_action('wp_ajax_get_header', array($this, 'get_header'));
             add_action('wp_ajax_nopriv_get_footer', array($this, 'get_footer'));
             add_action('wp_ajax_get_footer', array($this, 'get_footer'));
-
-            // wp_enqueue_script('get-site-header-scripts', plugin_dir_url(__FILE__) . '/assets/get-site-header-styles.js', array('jquery'), false, false);
         }
 
         public function get_header()
         { ?>
 
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800" rel="stylesheet">
             <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) ?>/assets/get-site-header-styles.css" type="text/css" media="all" />
             <link rel="stylesheet" href="<?php echo plugin_dir_url(__FILE__) ?>/assets/header.css" type="text/css" media="all" />
 
@@ -165,10 +163,17 @@ if (!class_exists('GetSiteHeader')) :
         }
 
         public function get_footer()
-        {
-            wp_head();
-            get_footer();
-            die;
+        { ?>
+
+            <footer id="footer" class="site-footer">
+                <div class="container site-info">
+                    <div class="row">
+                        <?php get_sidebar('footer'); ?>
+                    </div>
+                </div>
+            </footer>
+
+            <?php die;
         }
 
     }
